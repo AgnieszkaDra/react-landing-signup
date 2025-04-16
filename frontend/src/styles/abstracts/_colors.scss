@@ -2,10 +2,38 @@
 
 $white: rgba(255, 255, 255, 1);
 $navy: rgba(47, 24, 147, 1);
+$heading: rgba(30, 14, 98, 1);
 $pink: rgba(233, 58, 125, 1);
+$light-green: rgba(37, 218, 197, 1);
+$grey: rgba(235, 234, 237, 1);
+$blue: rgba(29, 161, 242, 1);
+
 
 :root {
-  --color-white: rgba(255, 255, 255, 1);
-  --color-navy: rgba(47, 24, 147, 1);
-  --color-pink: rgba(233, 58, 125, 1);
+  --color-white: #{$white};
+  --color-navy: #{$navy};
+  --color-pink: #{$pink};
+  --color-light-green: #{$light-green};
+  --color-grey: #{$grey};
+  --color-blue: #{$blue};
+}
+
+.navy {
+  background-color: $navy;
+}
+
+.pink {
+  background-color: $pink;
+}
+
+.light-green {
+  background-color: $light-green;
+}
+
+.grey {
+  background-color: $grey;
+}
+
+.blue {
+  background-color: $blue;
 }
