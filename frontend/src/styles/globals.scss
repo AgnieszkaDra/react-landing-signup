@@ -16,6 +16,10 @@ body{
   color: $white;
 }
 
+html, body {
+  height: 100%;
+}
+
 li {
   list-style: none;
 }
@@ -37,9 +41,9 @@ img {
 
 
 #root {
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
-  width: 100%;
+ 
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -47,7 +51,7 @@ img {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  padding: 1rem 1rem;
+  padding: 1rem 3rem;
   // &__login, &__register {
   //   display: none;
   //   &.block {
@@ -57,7 +61,7 @@ img {
 
   @include respond(tablet) {
     padding: 0;
-    margin: 0 4rem;
+    margin: 0 6rem;
   }
   @include respond(desktop) {
     padding: 0;
@@ -72,12 +76,20 @@ img {
 }
 
 
-.btn {
+.button {
+ //max-width: 100%;
   font-weight: 500;
   font-size: 18px;
   line-height: 26px;
   letter-spacing: 0;
   vertical-align: middle;
+   
+  &__wrapper {
+
+   margin-right: 2rem;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .form__error {
@@ -86,3 +98,34 @@ img {
   font-size: 0.875rem;
 }
 
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 58px;
+  line-height: 70px;
+  letter-spacing: -1px;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 52px;
+  letter-spacing: -0.4px;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}

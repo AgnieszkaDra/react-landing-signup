@@ -4,10 +4,12 @@ import { createFieldComponent } from '../../ui/elements/createFieldComponent';
 import { RequiredRule, EmailRule, PasswordRule } from '../../helpers/rules';
 import Error from '../Error/Error';
 import Title from '../../typography/Title';
-import '../../styles/form.scss';
+// import '../../styles/form.scss';
 import { email, password } from '../../ui/formFields';
-import CheckboxInput from '../../ui/elements/CheckboxInput';
+import Checkbox from '../../ui/elements/Checkbox';
 import Button from '../../ui/elements/Button/Button';
+import { motion } from 'framer-motion';
+import DividerWithText from '../../ui/DividerWithText';
 
 const EmailField = createFieldComponent(email);
 const PasswordField = createFieldComponent(password);
@@ -15,7 +17,7 @@ const PasswordField = createFieldComponent(password);
 type FormValues = {
   emailUser: string;
   password: string;
-  termsAccepted: boolean; // Added the checkbox state
+  termsAccepted: boolean;
 };
 
 type FormErrors = Partial<Record<keyof FormValues, string>>;
@@ -24,20 +26,38 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
   const [formValues, setFormValues] = useState<FormValues>({
     emailUser: '',
     password: '',
-    termsAccepted: false, // Initial checkbox state
+    termsAccepted: false,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [generalError, setGeneralError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (name: keyof FormValues, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: '' }));
     setGeneralError('');
+    setSuccessMessage('');
+  };
+
+  const simulateRequest = (email: string) => {
+    return new Promise((resolve, reject) => {
+      if (email === 'delay@example.com') {
+        setTimeout(() => resolve('Delayed response success'), 2000);
+      } else if (email === 'success@example.com') {
+        resolve('Success');
+      } else if (email.endsWith('@blocked.com')) {
+        reject(new Error('This email domain is blocked.'));
+      } else {
+        reject(new Error('Unknown error occurred.'));
+      }
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     const fields = [email, password];
     let valid = true;
@@ -53,7 +73,6 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       }
     }
 
-    // Check if the terms checkbox is accepted
     if (!formValues.termsAccepted) {
       valid = false;
       newErrors.termsAccepted = 'You must accept the terms and conditions.';
@@ -61,47 +80,80 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
 
     setErrors(newErrors);
 
-    if (!valid) return;
+    if (!valid) {
+      setIsSubmitting(false);
+      return;
+    }
 
-    // Simulate API login
     try {
-      console.log('Logging in with:', formValues);
-      // const response = await logIn(formValues); // Uncomment when ready
-    } catch (err) {
-      setGeneralError('Nie udało się zalogować. Spróbuj ponownie.');
+      const response = await simulateRequest(formValues.emailUser);
+      console.log('Simulated response:', response);
+      setSuccessMessage('Successfully signed up!');
+      alert('✅ Successfully signed up!');
+    } catch (err: any) {
+      setGeneralError(err.message || 'Something went wrong. Please try again.');
+      alert(`❌ ${err.message}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <form
+    <motion.form
       className={`form ${className || ''}`}
       onSubmit={handleSubmit}
       noValidate
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
     >
       <Title kind="h3" text="Sign Up Now" className="form__title" />
+
       {generalError && <Error>{generalError}</Error>}
-        <div className='form__inputs'>
+      {successMessage && <p className="form__success">{successMessage}</p>}
+
+      <div className="form__inputs">
+        <motion.div whileHover={{ scale: 1.02 }}>
             <EmailField
-                value={formValues.emailUser}
-                onChange={(e) => handleChange('emailUser', e.target.value)}
-                error={errors.emailUser}
+            value={formValues.emailUser}
+            onChange={(e) => handleChange('emailUser', e.target.value)}
+            error={errors.emailUser}
             />
-            <PasswordField
-                value={formValues.password}
-                onChange={(e) => handleChange('password', e.target.value)}
-                error={errors.password}
-            />
-        </div>
-        <CheckboxInput
-            label="I accept the terms and conditions"
-            name="termsAccepted"
-            checked={formValues.termsAccepted}
-            onChange={(checked) => handleChange('termsAccepted', checked)}
-        />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.02 }}>
+           <PasswordField
+          value={formValues.password}
+          onChange={(e) => handleChange('password', e.target.value)}
+          error={errors.password}
+        /> 
+        </motion.div>
+        
+      </div>
+      <motion.div whileHover={{ scale: 1.01 }}>
+      <Checkbox
+  checked={formValues.termsAccepted}
+  onChange={(checked: boolean) => handleChange('termsAccepted', checked)}
+  label="I agree to the Terms of Service"
+/>
+
+    </motion.div>
+     <DividerWithText></DividerWithText>
       {errors.termsAccepted && <Error>{errors.termsAccepted}</Error>}
-      <Button text='Sign In' backgroundColor='navy' className='form__button'/>
-      <Button text='Login via Twitter' backgroundColor='blue' className='form__button'/>
-    </form>
+
+      <Button
+        text={isSubmitting ? 'Signing up...' : 'Sign In'}
+        backgroundColor="navy"
+        className="form__button"
+        disabled={isSubmitting}
+      />
+
+      <Button
+        text="Login via Twitter"
+        backgroundColor="blue"
+        className="form__button"
+      />
+    </motion.form>
   );
 };
 

@@ -2,9 +2,11 @@
 
 .form {
     width: 100%;
-    
+    margin: 3rem 0;
     @include respond(tablet) {
-      height: 67vh;  
+    width: 80%;
+      height: 67vh;
+      margin: auto;  
     }
     border: 2px solid $grey;
     border-radius: 10px;
@@ -18,8 +20,15 @@
     &__field {
         margin-right: 2rem;
         margin-left: 2rem;
-        margin-bottom: 2rem; 
-    } 
+        margin-bottom: 2rem;
+        display: flex;
+    }
+
+    &__error {
+        color: #e53935;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
 }
 .input {
     width: 100%;
@@ -28,10 +37,11 @@
     font-weight: 500;
     line-height: 26px;
     letter-spacing: 0;
+    color: $dark-grey;
     @include flexAbsoluteCenter();
     &__label {
         visibility: hidden;
-        margin-right: 6px;
+        width: 0;
     }
     &__checkbox {
         display: flex;
@@ -45,12 +55,34 @@
         display: flex;
         align-items: center;
         font-size: 14px;
-        color: #333;
+        color: $dark-grey;
         cursor: pointer;
+        margin-left: 10px;
+    }
+    &__image {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        &__wrapper {
+            width: 100%;
+            display: flex;
+        }
+        &__label {
+            margin-left: 10px
+        };
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
     }
     input[type="checkbox"] {
         margin-right: 0.5rem;
-        accent-color: #007bff; // Customize the checkbox color (works for some browsers)
+        accent-color: #007bff; 
         cursor: pointer;
       }
   
@@ -58,3 +90,33 @@
         text-decoration: underline;
       }
 }
+
+.divider-with-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+ 
+    margin-right: 2rem;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+  
+    .divider-line {
+      flex: 1;
+      height: px;
+      background-color: $grey;
+      border: 2px solid $grey;
+    }
+  
+    .divider-text {
+      padding: 0 1rem;
+      color: $dark-grey;
+      font-size: 16px;
+      line-height: 26px;
+      font-weight: 400;
+      letter-spacing: 10px;
+ 
+      
+      letter-spacing: 0.05em;
+    }
+  }
