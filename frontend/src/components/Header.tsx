@@ -1,19 +1,19 @@
 import React from 'react';
+import { useAppContext } from '../context/useAppContext';
+import Hamburger from '../ui/elements/Hamburger';
+import Menu from '../ui/elements/Menu';
 
-interface HeaderProps {
-  children?: React.ReactNode;
-  className?: string;
-}
-
-export const Header: React.FC<HeaderProps> = ({
-  children,
-}) => {
-
+const Header: React.FC = () => {
+  const { navbarOpen, openNavbar } = useAppContext();
   return (
-    <header
-      className={`header`}
-    >
-      {children}
+    <header className="header">
+      <div className='mobile-nav'>
+        <Hamburger />  
+      </div>
+      <nav className={`${navbarOpen ? `nav open ` : 'nav'}`}>
+        <Menu navbarOpen={navbarOpen} navbarOpenFunc={openNavbar}></Menu> 
+      </nav>
+     
     </header>
   );
 };

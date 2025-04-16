@@ -1,0 +1,152 @@
+@use './abstracts/index' as *;
+
+@keyframes slideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    100% {
+      opacity: 1;
+      @include absCenter()
+    }
+  }
+  
+  // .header {
+  //   width: 100%;
+  //   height: 100%;
+  //   position: relative;
+  //   &__info {
+  //     font-size: 18pt;
+  //     line-height: 36pt;
+  //     //animation: slideInLeft 0.75s ease both;
+  //     width: 100%;
+  //     &--color {
+  //       color: $color-contrast;
+  //     }
+  //   }
+  // }
+  
+  .header {
+  
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5em 1.5em 2px;
+    max-width: 1440px;
+    margin: 0px auto;
+    width: 100%;
+  
+  }
+  
+  .mobile-nav {
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+  padding: 1em 1.5em;
+  background-color: $navy;
+  
+  @include respond(tablet) {
+      display: none;
+  }
+  }
+  
+  .burger-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    transition: background-color 0.3s ease-in-out; 
+    &:hover {
+      background-color: $grey;
+    }
+  
+    svg {
+      color: $grey;
+      transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; 
+    }
+  
+    &:hover svg {
+      transform: scale(1.1);
+      color: $grey; 
+    }
+  }
+  
+  .nav {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  transform: translateX(100%);
+  padding: 4em 2em;
+  
+  &.open {
+    transform: translate(0%);
+    transition: transform 1.5s linear;
+  }
+  
+  @include respond(desktop){
+    position: absolute;
+    transform: translate(0);
+    padding: 1em;
+    height: fit-content;
+  }
+  
+  }
+  
+  .menu {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  
+  @include respond(tablet) {
+    flex-direction: row;
+    height: fit-content;
+    width: 85%;
+    justify-content: space-between;
+    margin-left: auto;
+  }
+  
+  &__link {
+    font-size: 2.2rem;
+    color: $grey;
+    transition: color 0.3s;
+    &:hover {
+      color: $light-green;
+    }
+    &:active {
+      color: $blue
+    }
+  }
+  }
+  
+  .link {
+    display: flex;
+      &__decoration {
+        clip-path: polygon(25% 0, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+        display: block;
+        width: fit-content;
+        padding: 0.3em;
+        margin: auto 0.5em auto 0;
+        background-color: $light-green; 
+      }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
