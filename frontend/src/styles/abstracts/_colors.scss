@@ -1,0 +1,11 @@
+@use "sass:color";
+
+$white: rgba(255, 255, 255, 1);
+$navy: rgba(47, 24, 147, 1);
+$pink: rgba(233, 58, 125, 1);
+
+:root {
+  --color-white: rgba(255, 255, 255, 1);
+  --color-navy: rgba(47, 24, 147, 1);
+  --color-pink: rgba(233, 58, 125, 1);
+}
