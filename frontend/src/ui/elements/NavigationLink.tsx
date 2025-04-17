@@ -1,22 +1,15 @@
 import React from 'react';
-import { useAppContext } from '../../context/AppContext';
 import { NavLink } from 'react-router-dom';
 
 type NavigationLinkProps = {
   value: string;
-  to: string;  // Add 'to' prop for the path
+  to: string;
+  className?: string;
 };
 
-export const NavigationLink: React.FC<NavigationLinkProps> = ({ value, to }) => {
-  const { toggleShowNav } = useAppContext();
-
+export const NavigationLink: React.FC<NavigationLinkProps> = ({ value, to, className = '' }) => {
   return (
-    <NavLink 
-      to={to}  // Pass the 'to' prop here
-      onClick={toggleShowNav} 
-      className="menu__link link"
-    >
-      <span className="link__decoration"></span>
+    <NavLink to={to} className={`menu__link link ${className}`}>
       {value}
     </NavLink>
   );

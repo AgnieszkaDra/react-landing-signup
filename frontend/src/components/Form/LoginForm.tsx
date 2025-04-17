@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { InputField } from '../../ui/InputField';
 import { createFieldComponent } from '../../ui/elements/createFieldComponent';
 import { RequiredRule, EmailRule, PasswordRule } from '../../helpers/rules';
@@ -42,11 +43,15 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
   };
 
   const simulateRequest = (email: string) => {
+    console.log('ok')
     return new Promise((resolve, reject) => {
+      
       if (email === 'delay@example.com') {
         setTimeout(() => resolve('Delayed response success'), 2000);
-      } else if (email === 'success@example.com') {
-        resolve('Success');
+      } else if (email === 'fail@example.com') {
+        setTimeout(() => resolve('fail'), 2000);
+      }else if (email === 'success@example.com') {
+        resolve('Success'); // tutaj true/false
       } else if (email.endsWith('@blocked.com')) {
         reject(new Error('This email domain is blocked.'));
       } else {
@@ -56,6 +61,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log('test')
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -70,6 +76,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       if (!result.valid) {
         valid = false;
         newErrors[field.config.name as keyof FormValues] = result.message;
+        toast(result.message);
       }
     }
 
@@ -80,16 +87,23 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
 
     setErrors(newErrors);
 
-    if (!valid) {
-      setIsSubmitting(false);
-      return;
-    }
+    // if (!valid) {
+    //   setIsSubmitting(false);
+    //   return;
+    // }
 
-    try {
+    //
+    try { 
+      /// fetch - url / post
       const response = await simulateRequest(formValues.emailUser);
+      if(response === 'fail') {
+       toast('Nie zostałeś zalogowany')
+      } else {
+        toast('zostałęs zalogowany')
+      }
       console.log('Simulated response:', response);
       setSuccessMessage('Successfully signed up!');
-      alert('✅ Successfully signed up!');
+      //alert('✅ Successfully signed up!');
     } catch (err: any) {
       setGeneralError(err.message || 'Something went wrong. Please try again.');
       alert(`❌ ${err.message}`);
@@ -147,6 +161,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
         className="form__button"
         disabled={isSubmitting}
       />
+      <ToastContainer />
 
       <Button
         text="Login via Twitter"

@@ -1,54 +1,19 @@
-// import { createContext, ReactNode, useState } from 'react';
-// import useToggleNavbar from '../hooks/useToggleNavbar';
-// import lists from '../data/lists';
-
-// export type AppContextType = {
-//   navbarOpen: boolean;
-//   openNavbar: () => void;
-//   menu: typeof lists.menu;
-//   toggleShowNav: () => void;  // Add this line
-// };
-
-// export const AppContext = createContext<AppContextType | undefined>(undefined);
-
-// type AppProviderProps = {
-//   children: ReactNode;
-// };
-
-// export const AppProvider = ({ children }: AppProviderProps) => {
-//   const { navbarOpen, openNavbar } = useToggleNavbar();
-//   const [showNav, setShowNav] = useState(false);
-
-//   // Define toggleShowNav
-//   const toggleShowNav = () => {
-//     setShowNav((prev) => !prev);
-//   };
-
-//   return (
-//     <AppContext.Provider
-//       value={{
-//         openNavbar,
-//         navbarOpen,
-//         menu: lists.menu,
-//         toggleShowNav,  // Add this line
-//       }}
-//     >
-//       {children}
-//     </AppContext.Provider>
-//   );
-// };
-
 import React, { createContext, useContext, useState } from 'react';
+import lists from '../data/lists';
 
-interface MenuItem {
+export interface MenuItem {
   id: number;
-  title: string;
-  childIds: number[];
+  title?: string;
+  name?: string;
+  path?: string;
+  classLink?: string;
+  classWrapper?: string;
+  childIds?: number[];
 }
 
-type MenuType = {
-  [id: number]: MenuItem;
-};
+export interface MenuType {
+  [key: number]: MenuItem;
+}
 
 interface AppContextType {
   navbarOpen: boolean;
@@ -63,12 +28,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const openNavbar = () => setNavbarOpen(prev => !prev);
 
-  // przykładowe menu
-  const menu: MenuType = {
-    0: { id: 0, title: 'Root', childIds: [1, 2] },
-    1: { id: 1, title: 'Home', childIds: [] },
-    2: { id: 2, title: 'About', childIds: [] },
-  };
+  const menu = lists.menu; 
 
   return (
     <AppContext.Provider value={{ navbarOpen, openNavbar, menu }}>

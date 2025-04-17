@@ -1,7 +1,10 @@
 export interface MenuItem {
   id: number;
-  title?: string;
+  title: string;
   name?: string;
+  path?: string;
+  classLink?: string;
+  classWrapper?: string;
   childIds?: number[];
 }
 
@@ -14,25 +17,37 @@ export const lists: { menu: Menu } = {
     0: {
       id: 0,
       name: '(Root)',
-      childIds: [1, 2, 3, 4],
+      title: 'Menu',
+      childIds: [1, 2, 3, 4, 5],
     },
     1: {
       id: 1,
-      title: 'Strona główna',
+      title: 'Overview',
+      path: '/overview',
+      classLink: 'link__disabled',
     },
     2: {
       id: 2,
-      title: 'O mnie',
+      title: 'Prices',
+      path: '/prices',
     },
     3: {
       id: 3,
-      title: 'Projekty',
+      title: 'Blog',
+      path: '/blog',
     },
     4: {
       id: 4,
-      title: 'Kontakt',
+      title: 'Feedback',
+      path: '/feedback',
     },
-  },
-};
+    5: {
+      id: 5,
+      title: 'Purchase',
+      path: '/purchase',
+      classWrapper: 'menu__item__button pink',
+    },
+  }
+}
 
 export default lists;

@@ -8,7 +8,7 @@ $light-green: rgba(37, 218, 197, 1);
 $grey: rgba(235, 234, 237, 1);
 $dark-grey: rgba(21, 20, 57, 0.4);
 $blue: rgba(29, 161, 242, 1);
-
+$navy-opacity: rgba(255, 255, 255, 0.3); 
 
 :root {
   --color-white: #{$white};
@@ -18,10 +18,15 @@ $blue: rgba(29, 161, 242, 1);
   --color-grey: #{$grey};
   --color-blue: #{$blue};
   --color-dark-grey: #{$dark-grey};
+  --color-navy-opacity: #{$navy-opacity};
 }
 
 .navy {
   background-color: $navy;
+}
+
+.navy-opacity {
+  color: $navy-opacity;
 }
 
 .pink {

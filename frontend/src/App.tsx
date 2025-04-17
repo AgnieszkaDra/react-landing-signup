@@ -11,7 +11,7 @@ import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [form, setForm] = useState(<LoginForm className='main__form'/>);
-  
+  // react context - ze state logIn useState()
   return (
     <>
  {/* <Toaster position="top-right" toastOptions={{ duration: 3000 }} >

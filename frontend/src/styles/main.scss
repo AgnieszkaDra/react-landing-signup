@@ -4,6 +4,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 10.4rem;
     @include respond(desktop) {
         display: flex;
         flex-direction: row;
