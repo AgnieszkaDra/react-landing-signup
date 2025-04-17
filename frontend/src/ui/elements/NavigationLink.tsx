@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppContext } from '../../context/useAppContext';
+import { useAppContext } from '../../context/AppContext';
 import { NavLink } from 'react-router-dom';
 
 type NavigationLinkProps = {

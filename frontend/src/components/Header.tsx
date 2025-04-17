@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppContext } from '../context/useAppContext';
+import { useAppContext } from '../context/AppContext';
 import Hamburger from '../ui/elements/Hamburger';
 import Menu from '../ui/elements/Menu';
 
