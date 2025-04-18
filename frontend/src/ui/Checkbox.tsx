@@ -1,6 +1,6 @@
 import React from 'react';
-import checkOff from '../../assets/On.png';
-import checkOn from '../../assets/Rectangle.png';
+import checkOff from '../assets/On.png'
+import checkOn from '../assets/Rectangle.png';
 
 interface CheckboxImageProps {
   checked: boolean;

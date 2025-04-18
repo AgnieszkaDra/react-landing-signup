@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppContext } from '../../context/AppContext';
-import NavigationLink from './NavigationLink';
+import { useAppContext } from '../context/AppContext';
+import NavigationLink from './elements/NavigationLink';
 
 const Menu: React.FC = () => {
   const { menu } = useAppContext();
@@ -16,10 +16,10 @@ const Menu: React.FC = () => {
           <li key={id} className={`menu__item ${menuItem.classWrapper || ''}`}>
             {menuItem.path && (
               <NavigationLink
-              to={menuItem.path || '#'}
-              value={menuItem.title || 'Untitled'}
-              className={menuItem.classLink || ''}
-            />
+                to={menuItem.path || '#'}
+                value={menuItem.title || 'Untitled'}
+                className={menuItem.classLink || ''}
+              />
             )}
           </li>
         );

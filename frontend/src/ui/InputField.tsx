@@ -79,3 +79,5 @@ export class InputField implements Field {
     
 }
 
+export default InputField
+

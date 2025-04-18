@@ -1,12 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useAppContext } from '../context/AppContext';
-import Hamburger from '../ui/elements/Hamburger';
-import Menu from '../ui/elements/Menu';
-import Logo from '../ui/elements/Logo';
+import { Hamburger, Logo, Menu } from '../ui'
 
 const Header: React.FC = () => {
-  const { navbarOpen, openNavbar } = useAppContext();
+  const { navbarOpen }= useAppContext();
   return (
     <motion.header
     className="header"
@@ -30,7 +28,7 @@ const Header: React.FC = () => {
       transition={{ delay: 0.4, duration: 0.6 }}
     >
       <Logo />
-      <Menu navbarOpen={navbarOpen} navbarOpenFunc={openNavbar} />
+      <Menu/>
     </motion.nav>
   </motion.header>
   );

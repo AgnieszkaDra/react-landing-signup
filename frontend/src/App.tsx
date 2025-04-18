@@ -1,28 +1,22 @@
 import { useState } from 'react';
+import { Header, Main, Panel, LoginForm } from './components';
+import { useAuth } from './context/AuthContext';
+import { Navigate } from 'react-router-dom';
 import './App.css';
 import '../src/styles/index.scss'
-import Header from './components/Header';
-import Main from './components/Main';
-import LoginForm from './components/Form/LoginForm';
-import AuthWrapper from './components/Form/AuthWrapper';
-import Panel from './components/Panel';
-import { Toaster } from 'react-hot-toast';
-
 
 function App() {
-  const [form, setForm] = useState(<LoginForm className='main__form'/>);
-  // react context - ze state logIn useState()
+  const [form] = useState(<LoginForm className='main__form' />);
+  const { isLoggedIn } = useAuth();
+ 
   return (
     <>
- {/* <Toaster position="top-right" toastOptions={{ duration: 3000 }} >
- {() => null} */}
       <Header />
       <Main>
         <Panel className='main__panel'/>
         {form}
-        {/* <AuthWrapper changeForm={setForm} />  optional to change setForm*/}
       </Main>
-{/* </></Toaster> */}
+      {isLoggedIn ? <Navigate to="/pricing" /> : '' }
     </>
   );
 }

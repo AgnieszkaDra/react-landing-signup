@@ -2,7 +2,7 @@ import React from 'react';
 import { FaBars } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 //import { useAppContext } from '../../context/useAppContext';
-import { useAppContext } from '../../context/AppContext';
+import { useAppContext } from '../context/AppContext';
 
 const CloseIcon = IoClose as React.FC<{ size?: number; className?: string }>;
 const BarsIcon = FaBars as React.FC<{ size?: number; className?: string }>;

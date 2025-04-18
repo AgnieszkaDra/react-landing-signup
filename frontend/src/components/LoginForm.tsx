@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { InputField } from '../../ui/InputField';
-import { createFieldComponent } from '../../ui/elements/createFieldComponent';
-import { RequiredRule, EmailRule, PasswordRule } from '../../helpers/rules';
-import Error from '../Error/Error';
-import Title from '../../typography/Title';
-// import '../../styles/form.scss';
-import { email, password } from '../../ui/formFields';
-import Checkbox from '../../ui/elements/Checkbox';
-import Button from '../../ui/elements/Button/Button';
 import { motion } from 'framer-motion';
-import DividerWithText from '../../ui/DividerWithText';
+import { createFieldComponent } from '../ui/elements/createFieldComponent';
+import { email, password } from '../ui/formFields';
+import { Checkbox, Button, DividerWithText } from '../ui'
+import { useAuth } from '../context/AuthContext';
+import Title from '../typography/Title';
+import { useNavigate } from 'react-router-dom';
 
 const EmailField = createFieldComponent(email);
 const PasswordField = createFieldComponent(password);
@@ -24,6 +20,9 @@ type FormValues = {
 type FormErrors = Partial<Record<keyof FormValues, string>>;
 
 const LoginForm = ({ className = '' }: { className?: string }) => {
+  const { login } = useAuth(); 
+  const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState<FormValues>({
     emailUser: '',
     password: '',
@@ -38,30 +37,28 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
   const handleChange = (name: keyof FormValues, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: '' }));
-    setGeneralError('');
-    setSuccessMessage('');
+  setGeneralError('');
+  setSuccessMessage('');
   };
 
   const simulateRequest = (email: string) => {
     console.log('ok')
     return new Promise((resolve, reject) => {
-      
       if (email === 'delay@example.com') {
         setTimeout(() => resolve('Delayed response success'), 2000);
       } else if (email === 'fail@example.com') {
         setTimeout(() => resolve('fail'), 2000);
-      }else if (email === 'success@example.com') {
-        resolve('Success'); // tutaj true/false
+      } else if (email === 'success@example.com') {
+        resolve('success');
       } else if (email.endsWith('@blocked.com')) {
         reject(new Error('This email domain is blocked.'));
       } else {
-        reject(new Error('Unknown error occurred.'));
+        resolve('success');
       }
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log('test')
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -76,7 +73,9 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       if (!result.valid) {
         valid = false;
         newErrors[field.config.name as keyof FormValues] = result.message;
+        console.log(result.message)
         toast(result.message);
+        return;
       }
     }
 
@@ -87,26 +86,19 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
 
     setErrors(newErrors);
 
-    // if (!valid) {
-    //   setIsSubmitting(false);
-    //   return;
-    // }
-
-    //
-    try { 
-      /// fetch - url / post
+    try {
       const response = await simulateRequest(formValues.emailUser);
-      if(response === 'fail') {
-       toast('Nie zostałeś zalogowany')
-      } else {
-        toast('zostałęs zalogowany')
+
+      if (response === 'fail') {
+        toast('Nie zostałeś zalogowany');
+      } else if (response === 'success') {
+        toast('Zostałeś zalogowany');
+        login(); 
+        navigate('/pricing')
       }
-      console.log('Simulated response:', response);
-      setSuccessMessage('Successfully signed up!');
-      //alert('✅ Successfully signed up!');
-    } catch (err: any) {
-      setGeneralError(err.message || 'Something went wrong. Please try again.');
-      alert(`❌ ${err.message}`);
+    } catch (error) {
+      console.error('Błąd logowania:', error);
+      toast('Wystąpił błąd podczas logowania');
     } finally {
       setIsSubmitting(false);
     }
@@ -114,7 +106,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
 
   return (
     <motion.form
-      className={`form ${className || ''}`}
+      className={`form ${className}`}
       onSubmit={handleSubmit}
       noValidate
       initial={{ opacity: 0, y: 30 }}
@@ -129,30 +121,31 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
 
       <div className="form__inputs">
         <motion.div whileHover={{ scale: 1.02 }}>
-            <EmailField
+          <EmailField
             value={formValues.emailUser}
             onChange={(e) => handleChange('emailUser', e.target.value)}
             error={errors.emailUser}
-            />
+          />
         </motion.div>
         <motion.div whileHover={{ scale: 1.02 }}>
-           <PasswordField
-          value={formValues.password}
-          onChange={(e) => handleChange('password', e.target.value)}
-          error={errors.password}
-        /> 
+          <PasswordField
+            value={formValues.password}
+            onChange={(e) => handleChange('password', e.target.value)}
+            error={errors.password}
+          />
         </motion.div>
-        
       </div>
-      <motion.div whileHover={{ scale: 1.01 }}>
-      <Checkbox
-  checked={formValues.termsAccepted}
-  onChange={(checked: boolean) => handleChange('termsAccepted', checked)}
-  label="I agree to the Terms of Service"
-/>
 
-    </motion.div>
-     <DividerWithText></DividerWithText>
+      <motion.div whileHover={{ scale: 1.01 }}>
+        <Checkbox
+          checked={formValues.termsAccepted}
+          onChange={(checked: boolean) => handleChange('termsAccepted', checked)}
+          label="I agree to the Terms of Service"
+        />
+      </motion.div>
+
+      <DividerWithText />
+
       {errors.termsAccepted && <Error>{errors.termsAccepted}</Error>}
 
       <Button

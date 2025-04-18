@@ -1,6 +1,6 @@
 import React from 'react';
 import Title from '../typography/Title';
-import Button from '../ui/elements/Button/Button';
+import Button from '../ui/Button';
 
 interface PanelProps {
     className?: string;
