@@ -27,17 +27,19 @@ export function createFieldComponent(inputField: InputField) {
       <label htmlFor={name} className="input__label">
         {label}
       </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        placeholder={placeholder || ''}
-        className={`form__input input ${error ? 'form__input--error' : ''}`}
-        value={value}
-        onChange={onChange}
-        autoComplete="off"
-      />
-      {error && <span className="form__error">{error}</span>}
+      <div className="input__wrapper">
+        <input
+          id={name}
+          name={name}
+          type={type}
+          placeholder={placeholder || ''}
+          className={`form__input input ${error ? 'form__input--error' : ''}`}
+          value={value}
+          onChange={onChange}
+          autoComplete="off"
+        />
+        {error && <span className="form__error">{error}</span>}
+      </div>
     </div>
   );
 

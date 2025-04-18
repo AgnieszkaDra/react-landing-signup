@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
-import NavigationLink from './elements/NavigationLink';
+import NavigationLink from './NavigationLink';
 
 const Menu: React.FC = () => {
   const { menu } = useAppContext();

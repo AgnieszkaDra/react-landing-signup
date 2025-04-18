@@ -68,7 +68,11 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       if (!result.valid) {
         valid = false;
         newErrors[field.config.name as keyof FormValues] = result.message;
+        setIsSubmitting(true);
         toast(result.message);
+        setTimeout(() => {
+          setIsSubmitting(false);
+        }, 5000);
         return;
       }
     }
@@ -76,7 +80,11 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
     if (!formValues.termsAccepted) {
       valid = false;
       newErrors.termsAccepted = 'You must accept the terms and conditions.';
+      setIsSubmitting(true);
       toast('This condition must be confirmed by the user');
+      setTimeout(() => {
+        setIsSubmitting(false);
+      }, 5000);
       return;
     }
 
@@ -112,7 +120,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
     >
       <Title kind="h3" text="Sign Up Now" className="form__title" />
       <div className="form__inputs">
-        <motion.div whileHover={{ scale: 1.02 }}>
+        <motion.div whileHover={{ scale: 1.02 }} >
           <EmailField
             value={formValues.emailUser}
             onChange={(e) => handleChange('emailUser', e.target.value)}
@@ -138,7 +146,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       <DividerWithText />
 
       <Button
-        text={isSubmitting ? 'Signing up...' : 'Sign In'}
+        text={isSubmitting ? 'Signing Up...' : 'Sign In'}
         backgroundColor="navy"
         className="form__button"
         disabled={isSubmitting}

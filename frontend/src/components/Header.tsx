@@ -20,8 +20,7 @@ const Header: React.FC = () => {
     >
       <Hamburger />
     </motion.div>
-
-    <motion.nav
+     <motion.nav
       className={`${navbarOpen ? 'nav open' : 'nav'}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

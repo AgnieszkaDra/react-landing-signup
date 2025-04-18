@@ -1,28 +1,3 @@
-// export class InputField {
-//     config: {
-//       type: string;
-//       name: string;
-//       label: string;
-//       placeholder?: string;
-//     };
-//     rules: Rule[];
-//     name: any;
-  
-//     constructor(config: InputField['config'], rules: Rule[]) {
-//       this.config = config;
-//       this.rules = rules;
-//     }
-  
-//     validate(value: string): string {
-//       for (const rule of this.rules) {
-//         const error = rule.validate(value);
-//         if (error) return error;
-//       }
-//       return '';
-//     }
-//   }
-
-
 export interface Field {
     config: {
       name: string;
@@ -37,8 +12,6 @@ export interface Field {
     errors: string[];
     validate?(value: string): { valid: boolean; message: string };
     getValue(): string;
-    //showErrors(errors: string[]): void;
-  
   }
 
   export abstract class Rule {

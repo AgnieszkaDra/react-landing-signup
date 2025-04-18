@@ -42,8 +42,6 @@ img {
 
 #root {
   min-height: 100vh;
-  overflow-x: hidden;
- 
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -52,12 +50,7 @@ img {
   align-items: center;
   justify-content: center;
   padding: 1rem 3rem;
-  // &__login, &__register {
-  //   display: none;
-  //   &.block {
-  //     display: block;
-  //   }
-  // }
+ 
 
   @include respond(tablet) {
     padding: 0;
@@ -69,11 +62,6 @@ img {
   }
 }
 
-.container {
- 
-  
-
-}
 
 
 .button {
@@ -83,20 +71,15 @@ img {
   line-height: 26px;
   letter-spacing: 0;
   vertical-align: middle;
-   
+  color: $white;
+   border: 0;
   &__wrapper {
 
-   margin-right: 2rem;
-    margin-left: 2rem;
-    margin-bottom: 2rem;
+   margin: 5rem auto;
   }
 }
 
-.form__error {
-  color: #e53935;
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-}
+
 
 
 h1 {

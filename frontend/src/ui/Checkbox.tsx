@@ -1,6 +1,6 @@
 import React from 'react';
-import checkOff from '../assets/On.png'
-import checkOn from '../assets/Rectangle.png';
+import checkOn from '../assets/On.png'
+import checkOff from '../assets/Rectangle.png';
 
 interface CheckboxImageProps {
   checked: boolean;
@@ -14,7 +14,7 @@ const Checkbox: React.FC<CheckboxImageProps> = ({ checked, onChange, label}) => 
     <div className='form__field'>
       <label className="checkbox__image__wrapper">
       <img
-        src={checked ? checkOff : checkOn}
+        src={checked ? checkOn : checkOff}
         alt={checked ? 'Checked' : 'Unchecked'}
         className="checkbox__image"
         onClick={() => onChange(!checked)}

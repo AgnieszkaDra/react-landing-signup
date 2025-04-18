@@ -6,16 +6,26 @@ interface ButtonProps {
   onClick?: () => void;
   backgroundColor?: string;
   className?: string;
+  disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ text, onClick, backgroundColor = '', className = '' }) => {
+const Button: React.FC<ButtonProps> = ({
+  text,
+  onClick,
+  backgroundColor = '',
+  className = '',
+  disabled = false,
+}) => {
+  const combinedButtonClassName = `button__wrapper ${backgroundColor} ${className}`.trim();
+
   return (
-    <div className="button__wrapper">
+    <div className={combinedButtonClassName}>
       <motion.button
-        className={`button ${backgroundColor} ${className}`.trim()}
+        className='button'
         onClick={onClick}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        disabled={disabled}
+        // whileHover={!disabled ? { scale: 1.05 } : undefined}
+        // whileTap={!disabled ? { scale: 0.95 } : undefined}
         transition={{ type: 'spring', stiffness: 300 }}
       >
         {text}
