@@ -30,19 +30,14 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [generalError, setGeneralError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (name: keyof FormValues, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: '' }));
-  setGeneralError('');
-  setSuccessMessage('');
   };
 
   const simulateRequest = (email: string) => {
-    console.log('ok')
     return new Promise((resolve, reject) => {
       if (email === 'delay@example.com') {
         setTimeout(() => resolve('Delayed response success'), 2000);
@@ -73,7 +68,6 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       if (!result.valid) {
         valid = false;
         newErrors[field.config.name as keyof FormValues] = result.message;
-        console.log(result.message)
         toast(result.message);
         return;
       }
@@ -82,6 +76,8 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
     if (!formValues.termsAccepted) {
       valid = false;
       newErrors.termsAccepted = 'You must accept the terms and conditions.';
+      toast('This condition must be confirmed by the user');
+      return;
     }
 
     setErrors(newErrors);
@@ -115,10 +111,6 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       transition={{ duration: 0.5 }}
     >
       <Title kind="h3" text="Sign Up Now" className="form__title" />
-
-      {generalError && <Error>{generalError}</Error>}
-      {successMessage && <p className="form__success">{successMessage}</p>}
-
       <div className="form__inputs">
         <motion.div whileHover={{ scale: 1.02 }}>
           <EmailField
@@ -135,7 +127,6 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
           />
         </motion.div>
       </div>
-
       <motion.div whileHover={{ scale: 1.01 }}>
         <Checkbox
           checked={formValues.termsAccepted}
@@ -145,8 +136,6 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       </motion.div>
 
       <DividerWithText />
-
-      {errors.termsAccepted && <Error>{errors.termsAccepted}</Error>}
 
       <Button
         text={isSubmitting ? 'Signing up...' : 'Sign In'}

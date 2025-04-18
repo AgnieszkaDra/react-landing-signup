@@ -14,7 +14,7 @@ const Checkbox: React.FC<CheckboxImageProps> = ({ checked, onChange, label}) => 
     <div className='form__field'>
       <label className="checkbox__image__wrapper">
       <img
-        src={checked ? checkOn : checkOff}
+        src={checked ? checkOff : checkOn}
         alt={checked ? 'Checked' : 'Unchecked'}
         className="checkbox__image"
         onClick={() => onChange(!checked)}
