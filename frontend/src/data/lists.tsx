@@ -24,7 +24,7 @@ export const lists: { menu: Menu } = {
       id: 1,
       title: 'Overview',
       path: '/overview',
-      classLink: 'link__disabled',
+      //classLink: 'link__disabled',
     },
     2: {
       id: 2,
@@ -45,7 +45,7 @@ export const lists: { menu: Menu } = {
       id: 5,
       title: 'Purchase',
       path: '/purchase',
-      classWrapper: 'menu__item__button pink',
+      //classWrapper: 'menu__item__button pink',
     },
   }
 }

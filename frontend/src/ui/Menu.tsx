@@ -13,7 +13,7 @@ const Menu: React.FC = () => {
       {menuIds?.map((id: number) => {
         const menuItem = menu[id];
         return (
-          <li key={id} className={`menu__item ${menuItem.classWrapper || ''}`}>
+          <li key={id} className={`menu__item`}>
             {menuItem.path && (
               <NavigationLink
                 to={menuItem.path || '#'}

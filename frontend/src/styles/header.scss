@@ -1,162 +1,138 @@
 @use './abstracts/index' as *;
 
-@keyframes slideInLeft {
-    0% {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-    100% {
-      opacity: 1;
-      @include absCenter()
-    }
-  }
-
-  .header {
-    position: relative;
-    width: 100%;
-    height: 40px;
-    @include flexAbsoluteCenter;
-    margin-top: 2rem;
-     &__mobile {
-      display: flex;
-      align-items: center;
-      justify-content:flex-end;
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      z-index: 2000;
-      padding: 0.25rem 1rem;
-      background-color: $color-background-dark;
-      box-sizing: border-box;
-      @include respond(md, lg, xl) {
-          display: none;
-      }
-    }
-  }
-  
-  .burger-menu {
-    @include flexAbsoluteCenter;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    transition: background-color 0.3s ease-in-out; 
-    svg {
-      color: $grey;
-      transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; 
-    }
-  
-    &:hover svg {
-      transform: scale(1.1);
-      color: $grey; 
-    }
-  }
-  
-  .nav {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    transform: translateX(100%);
-    background-color: $color-background-dark;
-    @include flexAbsoluteCenter();
-    &__logo {
-      display: none;
-      @include respond(md, lg, xl){
-        display: block;
-      }
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 100%;   
-      letter-spacing: -0.29px;
-    }
-    &.open {
-      transform: translate(0%);
-      transition: transform 1.5s linear;
-    }
-    
-    @include respond(md, lg, xl){
-      position: relative;
-      display: flex;
-      transform: translate(0);
-    }
-  
-  }
-  
-  .menu {
+.header {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  @include flexAbsoluteCenter;
+  margin-top: 2rem;
+    &__mobile {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    height: 100vh;
+    justify-content:flex-end;
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 100%;
-    padding-top: 10rem;
+    z-index: 2000;
+    padding: 0.25rem 1rem;
+    background-color: $color-background-dark;
+    box-sizing: border-box;
+    @include respond(md, lg, xl) {
+      display: none;
+    }
+  }
+}
   
-    & > * {
-      @include flexAbsoluteCenter();
+.burger-menu {
+  @include flexAbsoluteCenter;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  svg {
+   color: $white;
+  }
+}
+  
+.nav {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  transform: translateX(100%);
+  background-color: $color-background-dark;
+  @include flexAbsoluteCenter();
+  
+  &__logo {
+    display: none;
+    @include respond(md, lg, xl){
+      display: block;
     }
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;   
+    letter-spacing: -0.29px;
+  }
 
-    &__item {
-      padding: 2rem;
-    
-      @include respond(md, lg) {
-        padding: 0;
-      }
-    }
+  &.open {
+    transform: translate(0%);
+    transition: transform 1.5s linear;
+  }
+  
+  @include respond(md, lg, xl){
+    position: relative;
+    display: flex;
+    transform: translate(0);
+  }
+
+}
+  
+.menu {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  padding-top: 10rem;
+
+  & > * {
+    @include flexAbsoluteCenter();
+  }
+
+  &__item {
+    padding: 2rem;
   
     @include respond(md, lg, xl) {
-    height: 0;
-      padding-top: 0;
-      flex-direction: row;
-    
-      width: 70%;
-      justify-content: space-between;
-      margin-left: auto;
-    }
-  
-    // Desktop styles
-    @include respond(lg) {
-      width: 51.75%;
-    }
-  
-    &__link {
-      font-size: 1.8rem;
-      line-height: 26px;
-      letter-spacing: 0;
-      color: $white;
-      font-weight: 500;
-      transition: color 0.3s;
-  
-      &:hover {
-        color: $color-action-primary;
-      }
-  
-      &:active {
-        color: $color-action-secondary;
-      }
-    }
-  
-    &__item {
-      &__button {
-        background-color: $color-action-third;
-        width: 120px;
-        height: 2rem;
-        border-radius: 100px;
-        @include flexAbsoluteCenter();
-        overflow: visible;
-        @include respond(md, lg) {
-          height: 40px;
-        }
-      }
+      padding: 0;
     }
   }
 
-  // .link {
-  //   &__disabled {
-  //     color: $navy-opacity;
-  //   }
-  // }
+  @include respond(md, lg, xl) {
+    height: 0;
+    padding-top: 0;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-between;
+    margin-left: auto;
+  }
+
+  @include respond(lg) {
+    width: 51.75%;
+  }
+
+  &__link {
+    font-size: 1.8rem;
+    line-height: 26px;
+    letter-spacing: 0;
+    color: $white;
+    font-weight: 500;
+    transition: color 0.3s;
+
+    &:hover{
+      opacity: 30%;
+    }
+
+  }
+
+  &__item {
+
+    &:active {
+      background-color: $color-action-third;
+      width: 120px;
+      height: 2rem;
+      border-radius: 100px;
+      @include flexAbsoluteCenter();
+      overflow: visible;
+      @include respond(md, lg) {
+      height: 40px;
+      }
+    }
+
+  }
+}
+
   
  
   
