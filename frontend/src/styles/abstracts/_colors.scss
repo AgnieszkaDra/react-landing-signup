@@ -1,50 +1,67 @@
 @use "sass:color";
 
+//$navy-opacity: rgba(255, 255, 255, 0.3); 
+
+// ----------------------
+// Colors
+// ----------------------
+
 $white: rgba(255, 255, 255, 1);
-$navy: rgba(47, 24, 147, 1);
 $heading: rgba(30, 14, 98, 1);
-$pink: rgba(233, 58, 125, 1);
-$light-green: rgba(37, 218, 197, 1);
+$text: rgba(21, 20, 57, 0.4);
 $grey: rgba(235, 234, 237, 1);
-$dark-grey: rgba(21, 20, 57, 0.4);
-$blue: rgba(29, 161, 242, 1);
-$navy-opacity: rgba(255, 255, 255, 0.3); 
+
+
+// ----------------------
+// Background Colors
+// ----------------------
+
+$color-background-dark: rgba(47, 24, 147, 1);
+$color-background-light: rgba(255, 255, 255, 1);
+
+// ----------------------
+// Action Colors
+// ----------------------
+
+$color-action-primary: rgba(37, 218, 197, 1);
+$color-action-secondary: rgba(72, 43, 231, 1);
+$color-action-third: rgba(233, 58, 125, 1);
+
+// ----------------------
+// Social Colors
+// ----------------------
+$twitter: rgba(29, 161, 242, 1);
+
 
 :root {
   --color-white: #{$white};
-  --color-navy: #{$navy};
-  --color-pink: #{$pink};
-  --color-light-green: #{$light-green};
-  --color-grey: #{$grey};
-  --color-blue: #{$blue};
-  --color-dark-grey: #{$dark-grey};
-  --color-navy-opacity: #{$navy-opacity};
+  --color-heading: #{$heading};
+  --color-text: #{$text};
+  --color-background-dark: #{$color-background-dark};
+  --color-background-light: #{$color-background-light};
+  --color-action-primary: #{$color-action-primary};
+  --color-action-secondary: #{$color-action-secondary};
+  --color-action-third: #{$color-action-third};
+  --color-twitter: #{$twitter};
 }
 
-.navy {
-  background-color: $navy;
+.bg-dark {
+  background-color: $color-background-dark;
 }
 
-.navy-opacity {
-  color: $navy-opacity;
+// .navy-opacity {
+//   color: $navy-opacity;
+// }
+
+.act-primary {
+  background-color: $color-action-primary;
 }
 
-.pink {
-  background-color: $pink;
+.act-third {
+  background-color: $color-action-third;
 }
 
-.light-green {
-  background-color: $light-green;
+.twitter {
+  background-color: $twitter;
 }
 
-.grey {
-  background-color: $grey;
-}
-
-.blue {
-  background-color: $blue;
-}
-
-.dark-grey {
-  background-color: $dark-grey;
-}

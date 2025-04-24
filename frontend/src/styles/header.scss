@@ -27,7 +27,7 @@
       width: 100%;
       z-index: 2000;
       padding: 0.25rem 1rem;
-      background-color: $navy;
+      background-color: $color-background-dark;
       box-sizing: border-box;
       @include respond(tablet) {
           display: none;
@@ -62,7 +62,7 @@
   left: 0;
   top: 0;
   transform: translateX(100%);
-  background-color: $navy;
+  background-color: $color-background-dark;
   //padding: 4em 2em;
   @include flexAbsoluteCenter();
   &__logo {
@@ -187,17 +187,17 @@
       transition: color 0.3s;
   
       &:hover {
-        color: $light-green;
+        color: $color-action-primary;
       }
   
       &:active {
-        color: $blue;
+        color: $color-action-secondary;
       }
     }
   
     &__item {
       &__button {
-        background-color: $pink;
+        background-color: $color-action-third;
         width: 120px;
         height: 2rem;
         border-radius: 100px;
@@ -210,11 +210,11 @@
     }
   }
 
-  .link {
-    &__disabled {
-      color: $navy-opacity;
-    }
-  }
+  // .link {
+  //   &__disabled {
+  //     color: $navy-opacity;
+  //   }
+  // }
   
  
   
