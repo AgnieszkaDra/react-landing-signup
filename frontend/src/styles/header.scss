@@ -29,7 +29,7 @@
       padding: 0.25rem 1rem;
       background-color: $color-background-dark;
       box-sizing: border-box;
-      @include respond(tablet) {
+      @include respond(md, lg, xl) {
           display: none;
       }
     }
@@ -42,8 +42,6 @@
     cursor: pointer;
     padding: 8px;
     transition: background-color 0.3s ease-in-out; 
-   
-  
     svg {
       color: $grey;
       transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; 
@@ -56,98 +54,42 @@
   }
   
   .nav {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  transform: translateX(100%);
-  background-color: $color-background-dark;
-  //padding: 4em 2em;
-  @include flexAbsoluteCenter();
-  &__logo {
-    display: none;
-    @include respond(tablet){
-      display: block;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    transform: translateX(100%);
+    background-color: $color-background-dark;
+    @include flexAbsoluteCenter();
+    &__logo {
+      display: none;
+      @include respond(md, lg, xl){
+        display: block;
+      }
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 100%;   
+      letter-spacing: -0.29px;
     }
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 100%;   
-    letter-spacing: -0.29px;
-  }
-  &.open {
-    transform: translate(0%);
-    transition: transform 1.5s linear;
-  }
-  
-  @include respond(tablet){
-    position: relative;
-    display: flex;
-
-    // position: absolute;
-    transform: translate(0);
-    // padding: 1em;
-    // height: fit-content;
-  }
+    &.open {
+      transform: translate(0%);
+      transition: transform 1.5s linear;
+    }
+    
+    @include respond(md, lg, xl){
+      position: relative;
+      display: flex;
+      transform: translate(0);
+    }
   
   }
   
-  // .menu {
-  // height: 100%;
-  // width: 100%;
-  // display: flex;
-  // flex-direction: column;
-  // & > * {
-  //   @include flexAbsoluteCenter();
-  // }
-  
-  
-  // @include respond(tablet) {
-  //   flex-direction: row;
-  //   height: fit-content;
-  //   //width: 85%;
-  //   width:70%;
-  //   justify-content: space-between;
-  //   margin-left: auto;
-  // }
-  // @include respond(desktop){
-  //   width: 51.75%;
-  // }
-  
-  // &__link {
-  //   font-size: 1.8rem;    
-  //   color: $white;
-  //   transition: color 0.3s;
-  //   font-weight: 500;
-
-  // line-height: 26px;
-  // letter-spacing: 0;
- 
-  //   &:hover {
-  //     color: $light-green;
-  //   }
-  //   &:active {
-  //     color: $blue
-  //   }
-  // }
-  // &__item{
-  //   &__button{
-  //     background-color: $pink;
-  //     width: 120px;
-  //     height: 40px;
-  //     border-radius: 100px;
-  //     @include flexAbsoluteCenter();
-     
-  //     overflow: visible;
-  //   }
-  // }
-  // }
-
   .menu {
     display: flex;
     align-items: center;
     flex-direction: column;
-     height: 100vh;
+    height: 100vh;
     width: 100%;
     padding-top: 10rem;
   
@@ -158,12 +100,12 @@
     &__item {
       padding: 2rem;
     
-      @include respond(tablet) {
+      @include respond(md, lg) {
         padding: 0;
       }
     }
-    // Tablet styles
-    @include respond(tablet) {
+  
+    @include respond(md, lg, xl) {
     height: 0;
       padding-top: 0;
       flex-direction: row;
@@ -174,7 +116,7 @@
     }
   
     // Desktop styles
-    @include respond(desktop) {
+    @include respond(lg) {
       width: 51.75%;
     }
   
@@ -203,7 +145,7 @@
         border-radius: 100px;
         @include flexAbsoluteCenter();
         overflow: visible;
-        @include respond(tablet) {
+        @include respond(md, lg) {
           height: 40px;
         }
       }

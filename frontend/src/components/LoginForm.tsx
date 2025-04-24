@@ -147,7 +147,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
 
       <Button
         text={isSubmitting ? 'Signing Up...' : 'Sign In'}
-        backgroundColor="navy"
+        backgroundColor="bg-dark"
         className="form__button"
         disabled={isSubmitting}
       />
@@ -155,7 +155,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
 
       <Button
         text="Login via Twitter"
-        backgroundColor="blue"
+        backgroundColor="twitter"
         className="form__button"
       />
     </motion.form>
