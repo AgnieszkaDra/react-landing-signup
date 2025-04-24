@@ -16,7 +16,7 @@ const Panel: React.FC<PanelProps> = ({ className = '' }) => {
             of 25 usable pages you can use as is or you can add new blocks" 
             className="panel__description" 
         />
-        <Button text='Learn More' backgroundColor='pink' className='panel__button'/>
+        <Button text='Learn More' backgroundColor='act-third' className='panel__button'/>
       </aside>
     );
   };

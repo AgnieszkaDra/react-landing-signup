@@ -10,14 +10,14 @@ function App() {
   const { isLoggedIn } = useAuth();
  
   return (
-    <>
+    <div className='container'>
       <Header />
       <Main>
         <Panel className='main__panel'/>
         {form}
       </Main>
       {isLoggedIn ? <Navigate to="/pricing" /> : '' }
-    </>
+    </div>
   );
 }
 
