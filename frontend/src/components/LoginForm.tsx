@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import { createFieldComponent } from '../ui/elements/createFieldComponent';
 import { email, password } from '../ui/formFields';
-import { Checkbox, Button, DividerWithText } from '../ui'
+import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui'
 import { useAuth } from '../context/AuthContext';
 import Title from '../typography/Title';
 import { useNavigate } from 'react-router-dom';
@@ -142,9 +142,6 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
           label="I agree to the Terms of Service"
         />
       </motion.div>
-
-      <DividerWithText />
-
       <Button
         text={isSubmitting ? 'Signing Up...' : 'Sign In'}
         backgroundColor="bg-dark"
@@ -152,12 +149,20 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
         disabled={isSubmitting}
       />
       <ToastContainer />
-
+      <DividerWithText />
       <Button
         text="Login via Twitter"
         backgroundColor="twitter"
         className="form__button"
       />
+      <p className="form__footer">
+        Do you have an account? 
+        <NavigationLink
+                        to={'#'}
+                        value="Sign Up" 
+                        className={'form__link'}
+                      />
+      </p>
     </motion.form>
   );
 };

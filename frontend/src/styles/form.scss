@@ -5,16 +5,16 @@
 // ===========================
 .form {
 
-  margin-top: 18,7rem;
+ 
   margin: 3rem auto;
   border: 2px solid $grey;
   border-radius: 10px;
   background-color: $white;
+ //eight: 67.41vh;
 
-  @include respond(tablet) {
-    width: 80%;
-    margin: auto;
-  }
+  @include respond(md, lg, xl) {
+    margin-top: 8.2rem;
+ }
 
   &__title {
     color: $heading;
@@ -34,6 +34,10 @@
   &__field {
     padding: 1.2rem 0;
     @include flexAbsoluteCenter();
+  }
+
+  &__footer {
+    color: aqua;
   }
 }
 
