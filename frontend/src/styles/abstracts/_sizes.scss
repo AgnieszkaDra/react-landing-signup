@@ -1,7 +1,15 @@
+// $font-size: (
+//   small: 0.75rem,
+//   extra-small: 1rem,
+//   medium: 1.3rem,
+//   large: 2rem,
+//   extra-large: 3rem
+// );
+
 $font-size: (
   small: 0.75rem,
   extra-small: 1rem,
-  medium: 1.3rem,
+  medium: 1.8rem,
   large: 2rem,
   extra-large: 3rem
 );
@@ -17,3 +25,9 @@ $spacing: (
   medium: 1rem,
   large: 1.5rem
 );
+
+$font-weight: (
+  small: 400,
+  medium: 500,
+  large: 700
+)

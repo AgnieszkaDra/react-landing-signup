@@ -7,6 +7,7 @@
 
  
   margin: 3rem auto;
+ 
   border: 2px solid $grey;
   border-radius: 10px;
   background-color: $white;
@@ -25,31 +26,44 @@
   &__inputs {
     margin-top: 3.4rem;
     box-sizing: content-box;
-
-    & > * {
-      margin-bottom: 1.2rem;
-    }
   }
 
   &__field {
-    padding: 1.2rem 0;
     @include flexAbsoluteCenter();
+    & > * {
+      margin-bottom: 1rem;
+    }
+    & > :nth-child(2) {
+      margin-top: 1rem;
+    }
   }
 
   &__footer {
-    color: aqua;
+    font-size: map-get($font-size, medium);
+    font-weight: map-get($font-weight, medium);
+    margin: 1rem 0 4.8rem 0;
+    color: $text;
+    line-height: 28px;
+    padding: 1rem;
   }
+
+  &__link {
+    color: $color-action-primary;
+    margin-left: 1rem;
+    }
 }
 
 // ===========================
 // Input
 // ===========================
 .input {
-  font-size: 18px;
+  position: absolute;
+  left: 24px;
+  font-size: map-get($font-size, medium);
   font-weight: 500;
   line-height: 26px;
   letter-spacing: 0;
-  color: $grey;
+  color: $text;
   border: 0;
 
   &__wrapper {
@@ -58,6 +72,7 @@
     width: 330px;
     border: 2px solid $grey;
     border-radius: 100px;
+    position: relative;
   }
 
   &__label {
@@ -112,6 +127,8 @@
     &__wrapper {
       width: 330px;
       display: flex;
+      margin-top: 0.36rem;
+      margin-bottom: 2.8rem;
     }
 
     &__label {
@@ -128,7 +145,7 @@
   align-items: center;
   text-align: center;
   width: 330px;
-  margin: 5rem auto;
+  margin: 1.84rem auto 1.84rem auto;
 
   .divider-line {
     flex: 1;
@@ -160,5 +177,10 @@
     border: 2px solid transparent;
     border-radius: 100px;
     line-height: 26px;
+    margin: auto;
   }
+}
+
+.twitter {
+  margin-bottom: 2rem;
 }

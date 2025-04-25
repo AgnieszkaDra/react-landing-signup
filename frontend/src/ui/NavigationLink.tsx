@@ -9,7 +9,7 @@ type NavigationLinkProps = {
 
 export const NavigationLink: React.FC<NavigationLinkProps> = ({ value, to, className = '' }) => {
   return (
-    <NavLink to={to} className={`menu__link link ${className}`}>
+    <NavLink to={to} className={`link ${className}`}>
       {value}
     </NavLink>
   );

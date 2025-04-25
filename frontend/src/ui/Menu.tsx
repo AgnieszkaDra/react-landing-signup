@@ -18,7 +18,7 @@ const Menu: React.FC = () => {
               <NavigationLink
                 to={menuItem.path || '#'}
                 value={menuItem.title || 'Untitled'}
-                className={menuItem.classLink || ''}
+                className={'menu__link'}
               />
             )}
           </li>

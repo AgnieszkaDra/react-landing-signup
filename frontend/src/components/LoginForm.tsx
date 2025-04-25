@@ -95,6 +95,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
 
       if (response === 'fail') {
         toast('Nie zostałeś zalogowany');
+        // show there register form
       } else if (response === 'success') {
         toast('Zostałeś zalogowany');
         login(); 
@@ -156,10 +157,10 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
         className="form__button"
       />
       <p className="form__footer">
-        Do you have an account? 
+        Do you have an Account? 
         <NavigationLink
-                        to={'#'}
-                        value="Sign Up" 
+          to={'#'}
+                        value="Sign In" 
                         className={'form__link'}
                       />
       </p>
