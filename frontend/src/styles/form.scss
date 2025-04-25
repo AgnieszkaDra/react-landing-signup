@@ -65,6 +65,7 @@
   letter-spacing: 0;
   color: $text;
   border: 0;
+  outline: none;
 
   &__wrapper {
     @include flexAbsoluteCenter();

@@ -1,0 +1,27 @@
+@use './abstracts/index' as *;
+
+.pricing {
+    background-color: $white;
+    color: $text;
+    width: 100%; 
+    min-height: 100vh;
+    
+    &__heading {
+        font-size: map-get($font-size, extra-large);
+        color: $heading;
+        font-weight: map-get($font-weight, large);
+        margin: auto;
+        @include respond(md, lg, xl) {
+            width: 61rem;
+            margin-top: 10rem;
+        }
+    }
+
+    &__subheading {
+        font-size: 16px;
+        font-weight: map-get($font-weight, medium);
+        line-height: 26px;
+        padding: 1rem;
+        margin-top: 2.4rem;
+    }
+}

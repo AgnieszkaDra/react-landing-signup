@@ -33,3 +33,20 @@ export class PasswordRule extends Rule {
       return 'Hasło musi mieć co najmniej 6 znaków.';
     }
   }
+
+  export class LengthRule extends Rule {
+    private minLength: number;
+  
+    constructor(minLength: number) {
+      super();
+      this.minLength = minLength;
+    }
+  
+    validate(value: any): boolean {
+      return value.length >= this.minLength;
+    }
+  
+    getErrorMessage(): string {
+      return `Wartość musi mieć co najmniej ${this.minLength} znaków.`;
+    }
+  }

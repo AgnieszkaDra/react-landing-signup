@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from '../typography/Title';
+import Title from '../typography/Typography';
 import Button from '../ui/Button';
 
 interface PanelProps {

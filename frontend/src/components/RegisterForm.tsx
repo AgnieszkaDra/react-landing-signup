@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import { createFieldComponent } from '../ui/elements/createFieldComponent';
-import { email, password } from '../ui/formFields';
+import { name, email, password } from '../ui/formFields';
 import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui'
 import { useAuth } from '../context/AuthContext';
-import Title from '../typography/Title';
+import Title from '../typography/Typography';
 import { useNavigate } from 'react-router-dom';
 
+const NameField = createFieldComponent(name);
 const EmailField = createFieldComponent(email);
 const PasswordField = createFieldComponent(password);
 
 type FormValues = {
+  name: string;
   emailUser: string;
   password: string;
   termsAccepted: boolean;
@@ -19,11 +21,12 @@ type FormValues = {
 
 type FormErrors = Partial<Record<keyof FormValues, string>>;
 
-const LoginForm = ({ className = '' }: { className?: string }) => {
+const RegisterForm = ({ className = '' }: { className?: string }) => {
   const { login } = useAuth(); 
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState<FormValues>({
+    name: '',
     emailUser: '',
     password: '',
     termsAccepted: false,
@@ -57,7 +60,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const fields = [email, password];
+    const fields = [name, email, password];
     let valid = true;
     const newErrors: FormErrors = {};
 
@@ -94,10 +97,9 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       const response = await simulateRequest(formValues.emailUser);
 
       if (response === 'fail') {
-        toast('Nie zostałeś zalogowany');
-        navigate('/register')
+        toast('Nie zostałeś zarejestrowany');
       } else if (response === 'success') {
-        toast('Zostałeś zalogowany');
+        toast('Zostałeś zalogowany. Wybierz opcję produktu');
         login(); 
         navigate('/pricing')
       }
@@ -119,8 +121,15 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.5 }}
     >
-      <Title kind="h3" text="Sign Up Now" className="form__title" />
+      <Title kind="h3" text="Join US Now" className="form__title" />
       <div className="form__inputs">
+        <motion.div whileHover={{ scale: 1.02 }} >
+          <NameField
+            value={formValues.name}
+            onChange={(e) => handleChange('name', e.target.value)}
+            error={errors.name}
+          />
+        </motion.div>
         <motion.div whileHover={{ scale: 1.02 }} >
           <EmailField
             value={formValues.emailUser}
@@ -144,7 +153,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
         />
       </motion.div>
       <Button
-        text={isSubmitting ? 'Signing Up...' : 'Sign In'}
+        text={isSubmitting ? 'Signing Up...' : 'Sign Up'}
         backgroundColor="bg-dark"
         className="form__button"
         disabled={isSubmitting}
@@ -159,8 +168,8 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
       <p className="form__footer">
         Do you have an Account? 
         <NavigationLink
-          to={'#'}
-          value="Sign In ddddddddddd" 
+          to={'/login'}
+          value="Sign In" 
           className={'form__link'}
         />
       </p>
@@ -168,4 +177,4 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

@@ -5,7 +5,7 @@ import { createFieldComponent } from '../ui/elements/createFieldComponent';
 import { email, password } from '../ui/formFields';
 import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui';
 import { useAuth } from '../context/AuthContext';
-import Title from '../typography/Title';
+import Title from '../typography/Typography';
 import { useNavigate } from 'react-router-dom';
 
 const EmailField = createFieldComponent(email);
@@ -97,11 +97,9 @@ const LoginForm = ({
 
       if (response === 'fail') {
         toast('Nie zostałeś zalogowany');
-        setIsSignUp(true);  // Show the register form on failure
       } else if (response === 'success') {
         toast('Zostałeś zalogowany');
         login();
-        navigate('/pricing');
       }
     } catch (error) {
       console.error('Błąd logowania:', error);
@@ -162,7 +160,7 @@ const LoginForm = ({
       <Button text="Login via Twitter" backgroundColor="twitter" className="form__button" />
       <p className="form__footer">
         Do you have an Account?
-        <NavigationLink to="#" value="Sign In" className={'form__link'} />
+        <NavigationLink to="/login" value="Sign In" className={'form__link'} />
       </p>
     </motion.form>
   );

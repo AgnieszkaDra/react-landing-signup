@@ -16,12 +16,13 @@ createRoot(document.getElementById('root')!).render(
       <AuthProvider>
         <Router>
         <Routes>
-  <Route path="/" element={<App />}>
-    <Route index element={<LoginForm className="main__form" />} />
-    <Route path="register" element={<RegisterForm className="main__form" />} />
-  </Route>
-  <Route path="/pricing" element={<Pricing />} />
-</Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<LoginForm className="main__form" />} />
+            <Route path="register" element={<RegisterForm className="main__form" />} />
+            <Route path="login" element={<LoginForm className="main__form" />} />
+          </Route>
+          <Route path="/pricing" element={<Pricing />} />
+        </Routes>
         </Router>
       </AuthProvider>
     </AppProvider>

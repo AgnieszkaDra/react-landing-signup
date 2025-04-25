@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface TitleProps {
+interface TypographyProps {
   kind: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p';
   text: string;
   className: string;
 }
 
-const Title: React.FC<TitleProps> = ({ kind, text, className }) => {
+const Typography: React.FC<TypographyProps> = ({ kind, text, className }) => {
   return React.createElement(kind, { className }, text);
 };
 
-export default Title;
+export default Typography;

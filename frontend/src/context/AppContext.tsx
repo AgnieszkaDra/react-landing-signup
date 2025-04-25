@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import lists from '../data/lists';
+import data from '../data/data';
 
 export interface MenuItem {
   id: number;
@@ -28,7 +28,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const openNavbar = () => setNavbarOpen(prev => !prev);
 
-  const menu = lists.menu; 
+  const menu = data.menu;
 
   return (
     <AppContext.Provider value={{ navbarOpen, openNavbar, menu }}>
