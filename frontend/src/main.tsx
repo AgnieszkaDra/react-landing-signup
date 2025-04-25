@@ -1,15 +1,14 @@
-import 'modern-normalize/modern-normalize.css'; 
+import 'modern-normalize/modern-normalize.css';
 import './styles/fonts.scss';
-import './styles/global.scss';                
+import './styles/global.scss';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { AuthProvider } from './context/AuthContext';
-import { LoginForm, Pricing } from './components';
+import { LoginForm, Pricing, RegisterForm } from './components';
 import App from './App';
-import RegisterForm from './components/RegisterForm';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,12 +16,12 @@ createRoot(document.getElementById('root')!).render(
       <AuthProvider>
         <Router>
         <Routes>
-    <Route path="/" element={<App />}>
-      <Route index element={<LoginForm className="main__form" />} />
-      {/* <Route path="register" element={<RegisterForm className="main__form" />} /> */}
-    </Route>
-    <Route path="/pricing" element={<Pricing />} />
-  </Routes>
+  <Route path="/" element={<App />}>
+    <Route index element={<LoginForm className="main__form" />} />
+    <Route path="register" element={<RegisterForm className="main__form" />} />
+  </Route>
+  <Route path="/pricing" element={<Pricing />} />
+</Routes>
         </Router>
       </AuthProvider>
     </AppProvider>

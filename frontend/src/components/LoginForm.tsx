@@ -3,11 +3,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import { createFieldComponent } from '../ui/elements/createFieldComponent';
 import { email, password } from '../ui/formFields';
-import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui'
+import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui';
 import { useAuth } from '../context/AuthContext';
 import Title from '../typography/Title';
 import { useNavigate } from 'react-router-dom';
-import { nav } from 'framer-motion/client';
 
 const EmailField = createFieldComponent(email);
 const PasswordField = createFieldComponent(password);
@@ -22,10 +21,10 @@ type FormErrors = Partial<Record<keyof FormValues, string>>;
 
 const LoginForm = ({
   className = '',
-  setIsSignUp
+  //setIsSignUp
 }: {
   className?: string;
-  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+  //setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { login } = useAuth(); 
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ const LoginForm = ({
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSignUpState, setIsSignUpState] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleChange = (name: keyof FormValues, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -76,13 +75,9 @@ const LoginForm = ({
       if (!result.valid) {
         valid = false;
         newErrors[field.config.name as keyof FormValues] = result.message;
-        setIsSubmitting(true);
+        setIsSubmitting(false);
         toast(result.message);
-        setTimeout(() => {
-          setIsSubmitting(false);
-          setIsSignUpState(true)
-          //navigate('/register');
-        }, 5000);
+        setIsSignUp(true);
         return;
       }
     }
@@ -90,11 +85,8 @@ const LoginForm = ({
     if (!formValues.termsAccepted) {
       valid = false;
       newErrors.termsAccepted = 'You must accept the terms and conditions.';
-      setIsSubmitting(true);
+      setIsSubmitting(false);
       toast('This condition must be confirmed by the user');
-      setTimeout(() => {
-        setIsSubmitting(false);
-      }, 5000);
       return;
     }
 
@@ -105,11 +97,11 @@ const LoginForm = ({
 
       if (response === 'fail') {
         toast('Nie zostałeś zalogowany');
-        //navigate('/register')
+        setIsSignUp(true);  // Show the register form on failure
       } else if (response === 'success') {
         toast('Zostałeś zalogowany');
-        login(); 
-        navigate('/pricing')
+        login();
+        navigate('/pricing');
       }
     } catch (error) {
       console.error('Błąd logowania:', error);
@@ -131,7 +123,7 @@ const LoginForm = ({
     >
       <Title kind="h3" text="Sign Up Now" className="form__title" />
       <div className="form__inputs">
-        <motion.div whileHover={{ scale: 1.02 }} >
+        <motion.div whileHover={{ scale: 1.02 }}>
           <EmailField
             value={formValues.emailUser}
             onChange={(e) => handleChange('emailUser', e.target.value)}
@@ -159,28 +151,18 @@ const LoginForm = ({
         className="form__button"
         disabled={isSubmitting}
       />
-      {isSignUpState && (<p className="form__footer">
-        Don't you have an Account? Sign up Now
-        <NavigationLink
-          to={'/register'}
-          value="Sign Up" 
-          className={'form__link'}
-        />
-      </p>)}
+      {isSignUp && (
+        <p className="form__footer">
+          Don't you have an Account? Sign up Now
+          <NavigationLink to="/register" value="Sign Up" className={'form__link'} />
+        </p>
+      )}
       <ToastContainer />
       <DividerWithText />
-      <Button
-        text="Login via Twitter"
-        backgroundColor="twitter"
-        className="form__button"
-      />
+      <Button text="Login via Twitter" backgroundColor="twitter" className="form__button" />
       <p className="form__footer">
-        Do you have an Account? 
-        <NavigationLink
-          to={'#'}
-          value="Sign In" 
-          className={'form__link'}
-        />
+        Do you have an Account?
+        <NavigationLink to="#" value="Sign In" className={'form__link'} />
       </p>
     </motion.form>
   );
