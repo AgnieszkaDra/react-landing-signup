@@ -7,7 +7,6 @@ import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui'
 import { useAuth } from '../context/AuthContext';
 import Title from '../typography/Title';
 import { useNavigate } from 'react-router-dom';
-import { nav } from 'framer-motion/client';
 
 const EmailField = createFieldComponent(email);
 const PasswordField = createFieldComponent(password);
@@ -20,13 +19,7 @@ type FormValues = {
 
 type FormErrors = Partial<Record<keyof FormValues, string>>;
 
-const LoginForm = ({
-  className = '',
-  setIsSignUp
-}: {
-  className?: string;
-  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const LoginForm = ({ className = '' }: { className?: string }) => {
   const { login } = useAuth(); 
   const navigate = useNavigate();
 
@@ -38,7 +31,6 @@ const LoginForm = ({
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSignUpState, setIsSignUpState] = useState(false);
 
   const handleChange = (name: keyof FormValues, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -80,8 +72,6 @@ const LoginForm = ({
         toast(result.message);
         setTimeout(() => {
           setIsSubmitting(false);
-          setIsSignUpState(true)
-          //navigate('/register');
         }, 5000);
         return;
       }
@@ -105,7 +95,7 @@ const LoginForm = ({
 
       if (response === 'fail') {
         toast('Nie zostałeś zalogowany');
-        //navigate('/register')
+        navigate('/register')
       } else if (response === 'success') {
         toast('Zostałeś zalogowany');
         login(); 
@@ -159,14 +149,6 @@ const LoginForm = ({
         className="form__button"
         disabled={isSubmitting}
       />
-      {isSignUpState && (<p className="form__footer">
-        Don't you have an Account? Sign up Now
-        <NavigationLink
-          to={'/register'}
-          value="Sign Up" 
-          className={'form__link'}
-        />
-      </p>)}
       <ToastContainer />
       <DividerWithText />
       <Button
@@ -178,7 +160,7 @@ const LoginForm = ({
         Do you have an Account? 
         <NavigationLink
           to={'#'}
-          value="Sign In" 
+          value="Sign In ddddddddddd" 
           className={'form__link'}
         />
       </p>

@@ -1,22 +1,26 @@
-import { useState } from 'react';
-import { Header, Main, Panel, LoginForm } from './components';
+import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
-import { Navigate } from 'react-router-dom';
+import { Header, LoginForm, Main, Panel, RegisterForm } from './components';
 import './App.css';
-import '../src/styles/index.scss'
+import '../src/styles/index.scss';
+import { useState } from 'react';
 
 function App() {
-  const [form] = useState(<LoginForm className='main__form' />);
   const { isLoggedIn } = useAuth();
- 
+  const [isSignUp, setIsSignUp] = useState(false);
+
   return (
-    <div className='container'>
+    <div className="container">
       <Header />
       <Main>
-        <Panel className='main__panel'/>
-        {form}
+        <Panel className="main__panel" />
+        {isSignUp ? (
+          <RegisterForm className="main__form" />
+        ) : (
+          <LoginForm className="main__form" setIsSignUp={setIsSignUp} />
+        )}
       </Main>
-      {isLoggedIn ? <Navigate to="/pricing" /> : '' }
+      {isLoggedIn && <Navigate to="/pricing" />}
     </div>
   );
 }
