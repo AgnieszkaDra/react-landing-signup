@@ -33,7 +33,7 @@ export function createFieldComponent(inputField: InputField) {
           name={name}
           type={type}
           placeholder={placeholder || ''}
-          className={`form__input input ${error ? 'form__input--error' : ''}`}
+          className={`form__input input buttons middle ${error ? 'form__input--error' : ''}`}
           value={value}
           onChange={onChange}
           autoComplete="off"

@@ -34,15 +34,15 @@
         @include respond(md, lg, xl) {
             width: 85%;
         } 
-        font-weight: 500;
-        font-size: 22px;
-        line-height: 32px;
-        letter-spacing: 0;
         margin: 3rem 0;
     }
     &__button {
         display: flex;
         width: 15.7rem;
+        background-color: $color-action-third;
+        color: $white;
+        border-radius: 100px;
+        @include flexAbsoluteCenter();
         @include respond(md, lg, xl) {
              margin: 5rem auto 5rem 0; 
         } 

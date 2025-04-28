@@ -7,7 +7,10 @@
     min-height: 100vh;
 
     &__container {
-        margin: 10rem 11.5rem;
+        margin: 5rem 2rem; 
+        @include respond(md, lg, xl) {
+            margin: 10rem 11.5rem;
+        }
     }
     
     &__heading {
@@ -27,11 +30,14 @@
     &__list {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(3, auto);
-        grid-gap: 3.1rem;
-        margin-top: 6.4rem;
+        grid-template-columns: repeat(1, auto);
+        margin-top: 5rem;
+        grid-gap: 5rem;
         @include respond(md, lg, xl) {
+            grid-template-columns: repeat(3, auto);
+            grid-gap: 3.1rem;
             flex-direction: row;
+            margin-top: 6.4rem;
         }
     }
 
@@ -40,15 +46,45 @@
     }
 
     &__header {
+        height: 31.1rem;
         border: 2px solid $grey;
         border-radius: 10px;
-        color: $text;
+    }
+
+    &__features {
+       margin-top: 3.84rem; 
+    }
+
+    &__feature {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 7rem;
+    }
+}
+
+.feature {
+    &__check-icon {
+        width: 12px;
+        height: 7px;
+        border: 2px;
+        margin: auto 1.8rem auto 0;
+        @include flexAbsoluteCenter();
+    }
+    &--disabled {
+        color: $grey;
+        margin-left: calc(7rem + 1.8rem + 12px)
     }
 }
 
 .price {
+    background-color: $white;
+    color: $heading;
+    &.active {
+        background-color: $heading;
+        color: $white;
+    }
     &__container {
-        margin: 4.1rem 5.8rem;
+        margin: 4.2rem 5.65rem;
     }
     &__cost {
         margin-top: 2.38rem;
@@ -56,12 +92,20 @@
     //padding: 3.1rem 5.8rem;
  
     &__title {
-        color: $heading;
         text-transform: uppercase;
     }
     &__description {
         text-align: center;
         margin-top: 2.92rem;
+    }
+
+    &__button {
+       width: 20rem;
+        height: 50px;
+        margin-top: 2.86rem;
+        border: 2px solid $grey;
+        border-radius: 100px;
+        color: $heading;
     }
 }
 
@@ -70,7 +114,6 @@
     grid-template-columns: repeat(3, auto);
     grid-template-rows: 1fr;  
     justify-content: center;
-    color: $heading;
     &__value {
         margin-left: 1.6rem;
         margin-block-start: 0;

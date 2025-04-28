@@ -51,6 +51,10 @@
     color: $color-action-primary;
     margin-left: 1rem;
     }
+
+  &__button {
+    color: $white;
+  }
 }
 
 // ===========================
@@ -59,10 +63,6 @@
 .input {
   position: absolute;
   left: 24px;
-  font-size: map-get($font-size, medium);
-  font-weight: 500;
-  line-height: 26px;
-  letter-spacing: 0;
   color: $text;
   border: 0;
   outline: none;

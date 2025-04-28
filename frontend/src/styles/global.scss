@@ -66,15 +66,9 @@ img {
 }
 
 button {
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.6em 1.2em;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background-color: #1a1a1a;
+ 
   cursor: pointer;
-  transition: border-color 0.25s;
+
 }
 
 // ==============================
@@ -90,14 +84,7 @@ button {
 // ==============================
 // Buttons
 // ==============================
-.button {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 26px;
-  color: $white;
-  letter-spacing: 0;
-  border: 0;
-}
+
 
 .container {
   padding: 0 2rem;

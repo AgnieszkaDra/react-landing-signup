@@ -27,9 +27,7 @@ body {
       font-weight: map-get($font-weight, large);
       line-height: 70px;
       letter-spacing: -1px;;
-      color: $heading;
-      
-    }
+  }
   }
 
   &.h3 {
@@ -41,6 +39,15 @@ body {
       line-height: 52px;
       letter-spacing: -0.4px;
       color: $heading;
+    }
+  }
+
+  &.h5 {
+    &.lead {
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 32px;
+      letter-spacing: 0;
     }
   }
 }
@@ -55,6 +62,22 @@ body {
       font-weight: 700;
       font-size: 14px;
       line-height: 26px;}
+    }
+    &.paragraph {
+      margin:  1rem 0;
+    }
+}
+
+.buttons {
+  &.middle {
+    font-size: 18px;
+    font-weight: map-get($font-weight, medium);
+    line-height: 26px;
+    letter-spacing: 0px;
+    &.active {
+      background-color: $color-action-primary;
+      color: $white;
+    }
   }
 }
 

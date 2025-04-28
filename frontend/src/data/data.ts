@@ -4,7 +4,7 @@ export interface MenuItem {
   name?: string;
   path?: string;
   classLink?: string;
-  classWrapper?: string;
+  className?: string;
   childIds?: number[];
 }
 
@@ -106,8 +106,8 @@ export const data: { menu: Menu; pricing: Pricing } = {
       features: [
         { id: 1 },
         { id: 2 },
-        { id: 3, className: 'dis' },
-        { id: 4, className: 'dis' },
+        { id: 3, className: 'feature--disabled' },
+        { id: 4, className: 'feature--disabled' },
       ],
     },
     2: {
@@ -117,11 +117,12 @@ export const data: { menu: Menu; pricing: Pricing } = {
       price: 49,
       description:
         'More space and tools for small teams to collaborate and grow efficiently.',
+      className: 'active',
       features: [
         { id: 1 },
         { id: 2 },
         { id: 3 },
-        { id: 4, className: 'dis' },
+        { id: 4, className: 'feature--disabled' },
       ],
     },
     3: {
