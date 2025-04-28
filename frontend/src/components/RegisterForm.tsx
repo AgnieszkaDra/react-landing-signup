@@ -7,6 +7,7 @@ import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui'
 import { useAuth } from '../context/AuthContext';
 import Title from '../typography/Typography';
 import { useNavigate } from 'react-router-dom';
+import Typography from '../typography/Typography';
 
 const NameField = createFieldComponent(name);
 const EmailField = createFieldComponent(email);
@@ -121,7 +122,9 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.5 }}
     >
-      <Title kind="h3" text="Join US Now" className="form__title" />
+      <Typography kind="h3" className="form__title">
+        Join Us Now
+      </Typography>
       <div className="form__inputs">
         <motion.div whileHover={{ scale: 1.02 }} >
           <NameField

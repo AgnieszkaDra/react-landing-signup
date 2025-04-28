@@ -20,5 +20,43 @@ body {
     --font-weight-bold: 700; 
 }
 
+.heading{
+  &.h2 {
+    &.header-font {
+      font-size: 58px;
+      font-weight: map-get($font-weight, large);
+      line-height: 70px;
+      letter-spacing: -1px;;
+      color: $heading;
+      
+    }
+  }
+
+  &.h3 {
+    &.title {
+      font-size: map-get($font-size, large);
+      font-size: 42px;
+      font-weight: map-get($font-weight, large);
+      font-weight: 700;
+      line-height: 52px;
+      letter-spacing: -0.4px;
+      color: $heading;
+    }
+  }
+}
+
+.text {
+  &.p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0;
+    &.label {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 26px;}
+  }
+}
+
 
 
