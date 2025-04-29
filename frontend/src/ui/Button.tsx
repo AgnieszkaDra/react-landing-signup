@@ -19,19 +19,14 @@ const Button: React.FC<ButtonProps> = ({
   const combinedButtonClassName = `button__wrapper ${backgroundColor} ${className}`.trim();
 
   return (
-   
-      <motion.button
-       
-        onClick={onClick}
-        disabled={disabled}
-        className={combinedButtonClassName}
-        // whileHover={!disabled ? { scale: 1.05 } : undefined}
-        // whileTap={!disabled ? { scale: 0.95 } : undefined}
-        transition={{ type: 'spring', stiffness: 300 }}
-      >
-        {text}
-      </motion.button>
-
+    <motion.button
+      onClick={onClick}
+      disabled={disabled}
+      className={combinedButtonClassName}
+      transition={{ type: 'spring', stiffness: 300 }}
+    >
+      {text}
+    </motion.button>
   );
 };
 

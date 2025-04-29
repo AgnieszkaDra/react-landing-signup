@@ -12,7 +12,7 @@ const Hamburger = () => {
       onClick={openNavbar} 
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      whileHover={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }} // mimic hover bg
+      whileHover={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }} 
       transition={{ duration: 0.4, ease: 'easeInOut' }}
     >
       <motion.div
@@ -25,15 +25,12 @@ const Hamburger = () => {
           }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-   {navbarOpen ? (
+        {navbarOpen ? (
           <CloseIcon size={30} className="icon open" />
-        ) : (
+            ) : (
           <BurgerIcon size={30} className="icon" />
-        )}
-
+          )}
         </motion.div>
-     
-        
       </motion.div>
     </motion.button>
   );

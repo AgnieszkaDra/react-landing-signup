@@ -7,7 +7,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { AuthProvider } from './context/AuthContext';
-import { LoginForm, Pricing, RegisterForm } from './components';
+import { FormComponent, LoginForm, Pricing, RegisterForm } from './components';
 import App from './App';
 
 createRoot(document.getElementById('root')!).render(
@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')!).render(
         <Router>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route index element={<LoginForm className="main__form" />} />
+            <Route index element={<FormComponent/>} />
             <Route path="register" element={<RegisterForm className="main__form" />} />
             <Route path="login" element={<LoginForm className="main__form" />} />
           </Route>

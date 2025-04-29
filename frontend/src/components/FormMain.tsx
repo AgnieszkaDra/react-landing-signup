@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+
 import { createFieldComponent } from '../ui/elements/createFieldComponent';
-import { name, email, password } from '../ui/formFields';
+import { email, password } from '../ui/formFields';
 import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui';
 import { useAuth } from '../context/AuthContext';
 
-const NameField = createFieldComponent(name);
 const EmailField = createFieldComponent(email);
 const PasswordField = createFieldComponent(password);
 
 type FormValues = {
-  name: string;
   emailUser: string;
   password: string;
   termsAccepted: boolean;
@@ -19,11 +19,14 @@ type FormValues = {
 
 type FormErrors = Partial<Record<keyof FormValues, string>>;
 
-const RegisterForm = ({ className = '' }: { className?: string }) => {
+interface LoginFormProps {
+  className?: string;
+}
+
+const FormMain: React.FC<LoginFormProps> = ({ className = '' }) => {
   const { register } = useAuth();
- 
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState<FormValues>({
-    name: '',
     emailUser: '',
     password: '',
     termsAccepted: false,
@@ -31,6 +34,7 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleChange = (name: keyof FormValues, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -38,7 +42,7 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
   };
 
   const simulateRequest = (email: string) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       if (email === 'delay@example.com') {
         setTimeout(() => resolve('Delayed response success'), 2000);
       } else if (email === 'fail@example.com') {
@@ -57,8 +61,7 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const fields = [name, email, password];
-    let valid = true;
+    const fields = [email, password];
     const newErrors: FormErrors = {};
 
     for (const field of fields) {
@@ -66,25 +69,20 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
       const result = field.validate(typeof value === 'string' ? value : '');
 
       if (!result.valid) {
-        valid = false;
         newErrors[field.config.name as keyof FormValues] = result.message;
-        setIsSubmitting(true);
+        setErrors(newErrors);
+        setIsSubmitting(false);
         toast(result.message);
-        setTimeout(() => {
-          setIsSubmitting(false);
-        }, 5000);
+        setIsSignUp(true);
         return;
       }
     }
 
     if (!formValues.termsAccepted) {
-      valid = false;
       newErrors.termsAccepted = 'You must accept the terms and conditions.';
-      setIsSubmitting(true);
+      setErrors(newErrors);
+      setIsSubmitting(false);
       toast('This condition must be confirmed by the user');
-      setTimeout(() => {
-        setIsSubmitting(false);
-      }, 5000);
       return;
     }
 
@@ -94,10 +92,11 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
       const response = await simulateRequest(formValues.emailUser);
 
       if (response === 'fail') {
-        toast('Nie zostałeś zarejestrowany');
+        toast('Nie zostałeś zalogowany');
       } else if (response === 'success') {
-        toast('Zostałeś zarejestrowany. Wybierz opcję produktu');
+        toast('Zostałeś zalogowany');
         register();
+        ///navigate('/pricing'); 
       }
     } catch (error) {
       console.error('Błąd logowania:', error);
@@ -117,15 +116,9 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className="h3 heading title form__title">Join Us Now</h3>
+      <h3 className={'h3 heading title form__title'}>Sign Up Now</h3>
+
       <div className="form__inputs">
-        <motion.div whileHover={{ scale: 1.02 }}>
-          <NameField
-            value={formValues.name}
-            onChange={(e) => handleChange('name', e.target.value)}
-            error={errors.name}
-          />
-        </motion.div>
         <motion.div whileHover={{ scale: 1.02 }}>
           <EmailField
             value={formValues.emailUser}
@@ -133,6 +126,7 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
             error={errors.emailUser}
           />
         </motion.div>
+
         <motion.div whileHover={{ scale: 1.02 }}>
           <PasswordField
             value={formValues.password}
@@ -141,28 +135,40 @@ const RegisterForm = ({ className = '' }: { className?: string }) => {
           />
         </motion.div>
       </div>
+
       <motion.div whileHover={{ scale: 1.01 }}>
         <Checkbox
           checked={formValues.termsAccepted}
-          onChange={(checked: boolean) => handleChange('termsAccepted', checked)}
+          onChange={(checked) => handleChange('termsAccepted', checked)}
           label="I agree to the Terms of Service"
         />
       </motion.div>
+
       <Button
-        text={isSubmitting ? 'Signing Up...' : 'Sign Up'}
+        text={isSubmitting ? 'Signing Up...' : 'Sign In'}
         backgroundColor="bg-dark"
         className="buttons middle form__button"
         disabled={isSubmitting}
       />
+
+      {isSignUp && (
+        <p className="form__footer">
+          Don't you have an Account?{' '}
+          <NavigationLink to="/register" value="Sign Up" className="form__link" />
+        </p>
+      )}
+
       <ToastContainer />
       <DividerWithText />
+
       <Button text="Login via Twitter" backgroundColor="twitter" className="buttons middle form__button" />
+
       <p className="form__footer">
-        Do you have an Account?
+        Do you have an Account?{' '}
         <NavigationLink to="/login" value="Sign In" className="form__link" />
       </p>
     </motion.form>
   );
 };
 
-export default RegisterForm;
+export default FormMain

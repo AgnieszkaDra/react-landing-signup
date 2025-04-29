@@ -28,6 +28,16 @@
     box-sizing: content-box;
   }
 
+  &__input {
+    width: 100%;
+    height: 100%;
+    &:disabled {
+      font-size: 10px;  
+    }
+  
+   
+  }
+
   &__field {
     @include flexAbsoluteCenter();
     & > * {
@@ -69,6 +79,7 @@
 
   &__wrapper {
     @include flexAbsoluteCenter();
+    overflow: hidden;
     height: 50px;
     width: 330px;
     border: 2px solid $grey;

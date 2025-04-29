@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-
 import { createFieldComponent } from '../ui/elements/createFieldComponent';
 import { email, password } from '../ui/formFields';
 import { Checkbox, Button, DividerWithText, NavigationLink } from '../ui';
 import { useAuth } from '../context/AuthContext';
+import { useInputValidation } from '../hooks/useInputValidation';
 
 const EmailField = createFieldComponent(email);
 const PasswordField = createFieldComponent(password);
@@ -24,7 +24,7 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ className = '' }) => {
-  const { login } = useAuth();
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState<FormValues>({
@@ -36,10 +36,29 @@ const LoginForm: React.FC<LoginFormProps> = ({ className = '' }) => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
+  const emailInputRef = useRef<HTMLInputElement>(null!);
+
+  useInputValidation(
+    emailInputRef,
+    email.validate,
+    () => setErrors((prev) => ({ ...prev, emailUser: '' })),
+    (msg) => {
+      setErrors((prev) => ({ ...prev, emailUser: msg }));
+      toast(msg);
+      setIsEmailValid(false);
+    }
+  );
 
   const handleChange = (name: keyof FormValues, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: '' }));
+
+    if (name === 'emailUser') {
+      const result = email.validate(value as string);
+      setIsEmailValid(result.valid);
+    }
   };
 
   const simulateRequest = (email: string) => {
@@ -96,8 +115,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className = '' }) => {
         toast('Nie zostałeś zalogowany');
       } else if (response === 'success') {
         toast('Zostałeś zalogowany');
-        login();
-        navigate('/pricing'); 
+        register();
       }
     } catch (error) {
       console.error('Błąd logowania:', error);
@@ -117,14 +135,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ className = '' }) => {
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className={'h3 heading title form__title'}>Sign Up Now</h3>
-
+      <h3 className="h3 heading title form__title">Sign In Now</h3>
       <div className="form__inputs">
+
         <motion.div whileHover={{ scale: 1.02 }}>
           <EmailField
             value={formValues.emailUser}
             onChange={(e) => handleChange('emailUser', e.target.value)}
             error={errors.emailUser}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = e.currentTarget.value;
+                const result = email.validate(value);
+                if (!result.valid) {
+                  setErrors((prev) => ({ ...prev, emailUser: result.message }));
+                  toast(result.message);
+                } else {
+                  setErrors((prev) => ({ ...prev, emailUser: '' }));
+                }
+              }
+            }}
           />
         </motion.div>
 
@@ -133,6 +164,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ className = '' }) => {
             value={formValues.password}
             onChange={(e) => handleChange('password', e.target.value)}
             error={errors.password}
+            disabled={!isEmailValid}
+            placeholder={!isEmailValid ? 'Your password. Please enter a valid email first' : undefined}
           />
         </motion.div>
       </div>
@@ -152,21 +185,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ className = '' }) => {
         disabled={isSubmitting}
       />
 
-      {isSignUp && (
-        <p className="form__footer">
-          Don't you have an Account?{' '}
-          <NavigationLink to="/register" value="Sign Up" className="form__link" />
-        </p>
-      )}
-
       <ToastContainer />
       <DividerWithText />
 
       <Button text="Login via Twitter" backgroundColor="twitter" className="buttons middle form__button" />
 
       <p className="form__footer">
-        Do you have an Account?{' '}
-        <NavigationLink to="/login" value="Sign In" className="form__link" />
+        Don't you have an Account?{' '}
+        <NavigationLink to="/register" value="Sign Up" className="form__link" />
       </p>
     </motion.form>
   );

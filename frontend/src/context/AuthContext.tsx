@@ -1,27 +1,26 @@
 import React, { createContext, useContext, useState } from 'react';
 
 type AuthContextType = {
-  isLoggedIn: boolean;
-  login: () => void;
-  logout: () => void;
+  isRegistered: boolean;
+  register: () => void;
+  registerOut: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log(isLoggedIn)
-
-  const login = () => {
-    setIsLoggedIn(true);
+  const [isRegistered, setIsRegister] = useState(false);
+ 
+  const register = () => {
+    setIsRegister(true);
   };
 
-  const logout = () => {
-    setIsLoggedIn(false);
+  const registerOut = () => {
+    setIsRegister(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isRegistered, register, registerOut }}>
       {children}
     </AuthContext.Provider>
   );

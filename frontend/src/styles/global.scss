@@ -4,6 +4,17 @@
 // ==============================
 // Reset & Base
 // ==============================
+
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+ 
+html {
+  font-size: 10px;
+}
+
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -25,31 +36,6 @@ body {
   overflow-x: hidden;
 }
 
-// ==============================
-// Typography
-// ==============================
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-// h2 {
-//   font-weight: 700;
-//   font-size: 58px;
-//   line-height: 70px;
-//   letter-spacing: -1px;
-// }
-
-h3 {
-  font-weight: 700;
-  font-size: 42px;
-  line-height: 52px;
-  letter-spacing: -0.4px;
-}
-
-// ==============================
-// Elements
-// ==============================
 li {
   list-style: none;
 }
@@ -66,24 +52,16 @@ img {
 }
 
 button {
- 
-  cursor: pointer;
-
+ cursor: pointer;
 }
 
 // ==============================
 // Root Container
 // ==============================
+
 #root {
-
- 
   @include flexAbsoluteCenter();
-
 }
-
-// ==============================
-// Buttons
-// ==============================
 
 
 .container {

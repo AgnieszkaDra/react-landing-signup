@@ -5,6 +5,7 @@ export abstract class Rule {
   
 export class RequiredRule extends Rule {
     validate(value: any): boolean {
+      console.log(value.trim().length )
       return value.trim().length > 0;
     }
   

@@ -22,6 +22,3 @@ export const password = new InputField(
 );
 
 
-// export const button = new ButtonField(
-//   { type: "submit", name: "buttonSend", label: "Zaloguj się" }
-// );
